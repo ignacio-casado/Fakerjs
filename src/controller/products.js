@@ -1,7 +1,7 @@
 const faker = require('faker')
 
 class Product {
-    constructor(name,description,material,price,image){
+    constructor(name,description,price,image){
         this.name=name;
         this.description=description;
         this.price=price;
@@ -11,17 +11,16 @@ class Product {
 
 }
 //copiado
-const obtenerData= (req,res)=>{
+const bringArray= (req,res)=>{
     //valida que se pasen los objetos de request y response
-    if (Object.prototype.toString.call(req) !== '[object Object]') throw new Error("req should be an object")
+    if (Object.prototype.toString.call(req) !== '[object Object]') throw new Error("missing data")
     if (!("render" in res)) throw new Error("res should be an object")
-    const response =[]
+    const product =[]
     for (let i=0;i<5;i++){
-        const fotoSelector=['fashion']
-    response.push(new Product(faker.commerce.productName(),faker.commerce.productDescription() ,faker.commerce.price(),faker.image.business(200,200,true)))
+        product.push(new Product(faker.commerce.productName(),faker.commerce.productDescription() ,faker.commerce.price(),faker.image.business(200,200,true)))
     }
-    res.render("home",{products:response})
-    return response
+    res.render("home",{products:product})
+    return product
     }
-    console.log(obtenerData)
-    module.exports=obtenerData
+    console.log(bringArray)
+    module.exports=bringArray
